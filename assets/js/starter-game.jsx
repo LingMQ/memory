@@ -22,7 +22,7 @@ class Starter extends React.Component {
   }
 
   render() {
-    let button = <div className="column" onMouseMove={this.swap.bind(this)}>
+    /* let button = <div className="column" onMouseMove={this.swap.bind(this)}>
       <p><button onClick={this.hax.bind(this)}>Click Me</button></p>
     </div>;
 
@@ -41,7 +41,37 @@ class Starter extends React.Component {
         {blank}
         {button}
       </div>;
-    }
+    } */
+
+    // The start of real code and the end of the starter code
+      let blank = <div className="column">
+          <p>Nothing here.</p>
+      </div>;
+
+    return (<div className="grid-container">
+
+            <div className="grid-item" onClick={this.hax.bind(this)}>1</div>
+            <div className="grid-item">2</div>
+            <div className="grid-item">3</div>
+            <div className="grid-item">4</div>
+
+            <div className="grid-item">1</div>
+            <div className="grid-item">2</div>
+            <div className="grid-item">3</div>
+            <div className="grid-item">4</div>
+
+            <div className="grid-item">1</div>
+            <div className="grid-item">2</div>
+            <div className="grid-item">3</div>
+            <div className="grid-item">4</div>
+
+            <div className="grid-item">1</div>
+            <div className="grid-item">2</div>
+            <div className="grid-item">3</div>
+            <div className="grid-item">4</div>
+    </div>
+    )
+
   }
 }
 
