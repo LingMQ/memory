@@ -10,7 +10,7 @@ class Starter extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            board: [["A", "B", "C", "D"], ["E", "F", "G", "H"], ["A", "B", "C", "D"], ["E", "F", "G", "H"]],
+            board: [["A", "C", "B", "E"], ["D", "F", "D", "G"], ["A", "H", "G", "B"], ["E", "F", "C", "H"]],
             status: [["", "", "", ""], ["", "", "", ""], ["", "", "", ""], ["", "", "", ""]],
             count: 0,
             prev_i: -1,
@@ -82,25 +82,25 @@ class Board extends React.Component {
     render() {
         return (
             <div>
-                <div className="board-row">
+                <div className="row">
                     {this.props.root.renderSquare(0, 0)}
                     {this.props.root.renderSquare(0, 1)}
                     {this.props.root.renderSquare(0, 2)}
                     {this.props.root.renderSquare(0, 3)}
                 </div>
-                <div className="board-row">
+                <div className="row">
                     {this.props.root.renderSquare(1, 0)}
                     {this.props.root.renderSquare(1, 1)}
                     {this.props.root.renderSquare(1, 2)}
                     {this.props.root.renderSquare(1, 3)}
                 </div>
-                <div className="board-row">
+                <div className="row">
                     {this.props.root.renderSquare(2, 0)}
                     {this.props.root.renderSquare(2, 1)}
                     {this.props.root.renderSquare(2, 2)}
                     {this.props.root.renderSquare(2, 3)}
                 </div>
-                <div className="board-row">
+                <div className="row">
                     {this.props.root.renderSquare(3, 0)}
                     {this.props.root.renderSquare(3, 1)}
                     {this.props.root.renderSquare(3, 2)}
@@ -127,7 +127,6 @@ function NumClick(params) {
 
 function Score(params) {
     return <div>
-        <p><b>Score: {params.root.getScoreStr()}</b></p>
-        <p>(Initial score is 116, use one click -1, max score is 100)</p>
+        <p><b>Score: {params.root.getScoreStr()}</b>  (Initial score is 116, use one click -1, max score is 100)</p>
     </div>;
 }

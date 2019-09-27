@@ -2,19 +2,6 @@
 
 @import "~milligram/dist/milligram";
 
-.column {
-    padding-top: 10ex;
-    text-align: center;
-    height: 100px;
-}
-
-.board-row {
-    clear: both;
-    content: "";
-    display: inline-grid;
-    background-color: #7EE4DC;
-    padding: 10px;
-}
 
 .square {
     border: 2px solid #999;
@@ -26,8 +13,7 @@
 }
 
 .game {
-    display: flex;
-    flex-direction: row;
+    padding: 5ex;
 }
 
 .column {
