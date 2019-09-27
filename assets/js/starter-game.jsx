@@ -10,14 +10,14 @@ class Starter extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // left: false
             board: [["A", "B", "C", "D"], ["E", "F", "G", "H"], ["A", "B", "C", "D"], ["E", "F", "G", "H"]],
             status: [["", "", "", ""], ["", "", "", ""], ["", "", "", ""], ["", "", "", ""]],
             count: 0,
             prev_i: -1,
             prev_j: -1,
             curr_i: -1,
-            curr_j: -1
+            curr_j: -1,
+            num_click: 0,
         };
     }
 
@@ -26,6 +26,7 @@ class Starter extends React.Component {
         if (this.state.count === 2) {
             console.log("reset")
             let empty_board = this.state.status
+            let new_score = this.state.score
 
             if (this.state.status[this.state.curr_i][this.state.curr_j] !== this.state.status[this.state.prev_i][this.state.prev_j]) {
                 empty_board[this.state.curr_i][this.state.curr_j] = ""
@@ -33,17 +34,28 @@ class Starter extends React.Component {
             }
             empty_board[i][j] = this.state.board[i][j]
             this.setState({board: this.state.board, status: empty_board, count: 1, prev_i: -1, prev_j: -1,
-                curr_i: i, curr_j: j})
-            console.log(this.state.status)
+                curr_i: i, curr_j: j, num_click: this.state.num_click + 1})
         } else {
             let tmp_status = this.state.status
             tmp_status[i][j] = this.state.board[i][j]
             this.setState({board: this.state.board, status: tmp_status, count: this.state.count + 1,
-                prev_i: this.state.curr_i, prev_j: this.state.curr_j, curr_i: i, curr_j: j})
-            console.log(this.state.status)
+                prev_i: this.state.curr_i, prev_j: this.state.curr_j, curr_i: i, curr_j: j, num_click: this.state.num_click + 1})
         }
     }
 
+    getNumClick() {
+        return this.state.num_click
+    }
+
+    getScoreStr() {
+        return 116 - this.state.num_click
+    }
+
+    reGame() {
+        let empty_status = [["", "", "", ""], ["", "", "", ""], ["", "", "", ""], ["", "", "", ""]]
+        this.setState({board: this.state.board, status: empty_status, count: 0, prev_i: -1, prev_j: -1,
+            curr_i: -1, curr_j: -1, num_click: 0})
+    }
 
     renderSquare(i, j) {
         return <Square value= {this.state.status[i][j]} onClick={() => this.handleClick(i, j)} />
@@ -58,6 +70,9 @@ class Starter extends React.Component {
                         <Board root={this} />
                     </div>
                 </div>
+                <NumClick root={this} />
+                <Score root={this} />
+                <button onClick={this.reGame.bind(this)}>Restart</button>
             </div>
         );
     }
@@ -104,3 +119,15 @@ function Square(props) {
     );
 }
 
+function NumClick(params) {
+    return <div>
+            <p><b>Number of Guesses: {params.root.getNumClick()}</b></p>
+        </div>;
+}
+
+function Score(params) {
+    return <div>
+        <p><b>Score: {params.root.getScoreStr()}</b></p>
+        <p>(Initial score is 116, use one click -1, max score is 100)</p>
+    </div>;
+}
