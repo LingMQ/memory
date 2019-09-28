@@ -1,0 +1,44 @@
+Please fill in answers to the questions below:
+
+
+1. What's your name?
+   Lingmiao Qiu
+
+
+
+2. What's the URL of the github repo with your work for this HW?
+   https://github.com/LingMQ/memory.git
+
+
+
+3. What's the URL that you deployed to?
+   memory1.lingmweb.site
+
+
+
+4. Is your game functionality complete? If not, what's missing?
+   The game is function complete!
+
+
+
+5. Is your game properly deployed? If not, what went wrong?
+   The deployment did gave me trouble. I had a hard time deploy
+   the website as a service when without service the website 
+   work totally fine. I think I messed up with the user
+   permission somehow.
+
+
+
+
+
+
+
+And here's a list of tasks for grading comments. Just leave this here:
+ - Development
+ - Deployment
+ - Submission
+ - AA
+ - BB
+ - CC
+
+
