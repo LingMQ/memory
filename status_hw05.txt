@@ -7,8 +7,7 @@ Lingmiao Qiu
 
 
 2. What's the URL of the github repo with your work for this HW?
-https://github.com/LingMQ/memory/tree/server-side
-
+https://github.com/LingMQ/memory.git
 
 
 3. What's the URL that you deployed to?
