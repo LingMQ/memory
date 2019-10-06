@@ -1,7 +1,6 @@
-<div id="root">
+
   <h1 id="index">Memory game</h1>
   <%= form_for @conn, "/game", fn f -> %>
   			<p>Enter a room name: <%= text_input f, :name, placeholder: "my_new_room" %></p>
   			<p><%= submit "Join Room"%></p>
   		<% end %>
-</div>
