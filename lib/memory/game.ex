@@ -53,26 +53,20 @@ defmodule Memory.Game do
   end
 
   defp compose_status(l, comp, guesses) do
-    l
-    |> Enum.map(fn cc ->
-      if Enum.member?(comp, cc) do
-        cc
+    new_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    new_list
+    |> Enum.map(fn index ->
+      if Enum.member?(comp, index) do
+        Enum.at(l, index)
       else
-        " "
+        if Enum.member?(guesses, index) do
+          Enum.at(l, index)
+        else
+          ""
+        end
       end
     end)
-    |> show_guess(guesses, l)
-  end
 
-  defp show_guess(list, [], _) do
-    list
-  end
-
-  defp show_guess(list, guess, origin) do
-    [a | guess] = guess
-    list
-    |> List.replace_at(a, Enum.fetch!(origin, a))
-    |> show_guess(guess, origin)
   end
 
   # Generate a new game
