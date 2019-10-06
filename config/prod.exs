@@ -80,6 +80,7 @@ config :logger, level: :info
 # file or create a script for recreating it, since it's
 # kept out of version control and might be hard to recover
 # or recreate for your teammates (or yourself later on).
+File.mkdir_p!(Path.expand("~/.config"))
 path = Path.expand("~/.config/memory.secret")
 unless File.exists?(path) do
   secret = Base.encode16(:crypto.strong_rand_bytes(32))
