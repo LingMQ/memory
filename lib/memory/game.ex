@@ -20,7 +20,7 @@ defmodule Memory.Game do
 
   def click(game, i, j) do
     click_num = i * 4 + j
-    {:ok, curr} = Enum.fetch(game.list, click_num)
+    curr = Enum.at(game.list, click_num)
     # meaning the tile is not completed yet
     if Enum.member?(game.completed, click_num) == false do
       case Enum.count(game.current) do
@@ -29,20 +29,18 @@ defmodule Memory.Game do
           |> Map.put(:current, [click_num])
           |> Map.put(:num_click, game.num_click + 1)
         1 ->
-
-          {:ok, previous} = Enum.fetch(game.list, Enum.at(game.current, 0))
+          prev_index = Enum.at(game.current, 0)
+          previous = Enum.at(game.list, prev_index)
           cond do
-            previous == click_num -> game
             # find the same
             previous == curr ->
               game
-              |> Map.put(:completed, game.completed ++ [curr, previous])
+              |> Map.put(:completed, game.completed ++ [click_num, prev_index])
               |> Map.put(:current, [])
               |> Map.put(:num_click, game.num_click + 1)
             previous != curr ->
               ng = game
                    |> Map.put(:num_click, game.num_click + 1)
-                   |> Map.put(:completed, game.completed ++ [click_num])
               [ng, Map.put(ng, :current, [])]
           end
         _ -> game

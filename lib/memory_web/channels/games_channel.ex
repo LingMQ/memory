@@ -18,9 +18,7 @@ defmodule MemoryWeb.GameChannel do
     case Game.click(socket.assigns[:game], i, j) do
       [ng, game] ->
         ng = game
-             |> Map.put(:num_click, game.num_click + 1)
              |> Map.put(:current, game.current ++ [click_num])
-        [ng, Map.put(ng, :current, [])]
         socket = assign(socket, :game, ng);
         Process.send_after(self(), {:refresh, game}, 1000)
         {:reply, {:ok, %{"game" => Game.client_view(ng)}}, socket}
