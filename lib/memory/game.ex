@@ -14,7 +14,7 @@ defmodule Memory.Game do
       guesses = game.current
       %{
         status: compose_status(l, comp, guesses),
-        num_clicks: game.num_click
+        num_click: game.num_click
       }
   end
 
