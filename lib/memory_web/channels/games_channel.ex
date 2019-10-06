@@ -3,12 +3,14 @@ defmodule MemoryWeb.GameChannel do
   use MemoryWeb, :channel
 
   alias Memory.Game
+  alias Memory.BackupAgent
 
   def join("game:" <> name, payload, socket) do
-    game = Game.new()
+    game = BackupAgent.get(name) || Game.new()
     socket = socket
              |> assign(:game, game)
              |> assign(:name, name)
+    BackupAgent.put(name, game)
     {:ok, %{"join" => name, "game" => Game.client_view(game)}, socket}
   end
 
@@ -20,10 +22,12 @@ defmodule MemoryWeb.GameChannel do
         ng = game
              |> Map.put(:current, game.current ++ [click_num])
         socket = assign(socket, :game, ng);
+        BackupAgent.put(name, game)
         Process.send_after(self(), {:refresh, game}, 1000)
         {:reply, {:ok, %{"game" => Game.client_view(ng)}}, socket}
       game ->
         socket = assign(socket, :game, game);
+        BackupAgent.put(name, game)
         {:reply, {:ok, %{"game" => Game.client_view(game)}}, socket}
     end
   end
