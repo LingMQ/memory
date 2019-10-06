@@ -29,6 +29,7 @@ class Starter extends React.Component {
     }
 
     handleClick(i, j) {
+        console.log("I:" + i + " J:" + j)
         this.channel.push("guess", {i, j})
             .receive("ok", this.get_view.bind(this));
     }
@@ -51,7 +52,7 @@ class Starter extends React.Component {
 
 
     renderSquare(i, j) {
-        return <Square value= {this.state.status[i][j]} onClick={() => this.handleClick(i, j)} />
+        return <Square value= {this.state.status[i * 4 + j]} onClick={() => this.handleClick(i, j)} />
     }
 
     render() {
