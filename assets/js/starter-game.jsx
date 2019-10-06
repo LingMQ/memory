@@ -11,15 +11,6 @@ class Starter extends React.Component {
         super(props);
         this.channel = props.channel
         this.state = {
-            /*
-            board: [["A", "C", "B", "E"], ["D", "F", "D", "G"], ["A", "H", "G", "B"], ["E", "F", "C", "H"]],
-            status: [["", "", "", ""], ["", "", "", ""], ["", "", "", ""], ["", "", "", ""]],
-            count: 0,
-            prev_i: -1,
-            prev_j: -1,
-            curr_i: -1,
-            curr_j: -1,
-            num_click: 0,*/
             status: ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
             num_click: 0,
         };
@@ -34,28 +25,6 @@ class Starter extends React.Component {
         console.log("new view", view);
         this.setState(view.game);
     }
-
-    /*
-    handleClick(i, j) {
-        if (this.state.count === 2) {
-            console.log("reset")
-            let empty_board = this.state.status
-            let new_score = this.state.score
-
-            if (this.state.status[this.state.curr_i][this.state.curr_j] !== this.state.status[this.state.prev_i][this.state.prev_j]) {
-                empty_board[this.state.curr_i][this.state.curr_j] = ""
-                empty_board[this.state.prev_i][this.state.prev_j] = ""
-            }
-            empty_board[i][j] = this.state.board[i][j]
-            this.setState({board: this.state.board, status: empty_board, count: 1, prev_i: -1, prev_j: -1,
-                curr_i: i, curr_j: j, num_click: this.state.num_click + 1})
-        } else {
-            let tmp_status = this.state.status
-            tmp_status[i][j] = this.state.board[i][j]
-            this.setState({board: this.state.board, status: tmp_status, count: this.state.count + 1,
-                prev_i: this.state.curr_i, prev_j: this.state.curr_j, curr_i: i, curr_j: j, num_click: this.state.num_click + 1})
-        }
-    }*/
 
     handleClick(i, j) {
         this.channel.push("guess", {click: i, j})

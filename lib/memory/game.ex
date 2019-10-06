@@ -11,10 +11,10 @@ defmodule Memory.Game do
   def client_view(game) do
       l = game.list
       comp = game.completed
-      guesses = game.guesses
+      guesses = game.current
       %{
-        skel: skeleton(l, comp, guesses),
-        clicks: game.times
+        status: compose_status(l, comp, guesses),
+        clicks: game.num_click
       }
   end
 
@@ -51,29 +51,9 @@ defmodule Memory.Game do
     end
   end
 
-  def skeleton(l, comp, guesses) do
-    l
-    |> Enum.map(fn cc ->
-      if Enum.member?(comp, cc) do
-        cc
-      else
-        " "
-      end
-    end)
-    |> show_guess(guesses, l)
+  defp compose_status(l, comp, guesses) do
+    ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
   end
-
-  defp show_guess(list, [], _) do
-    list
-  end
-
-  defp show_guess(list, guess, origin) do
-    [a | guess] = guess
-    list
-    |> List.replace_at(a, Enum.fetch!(origin, a))
-    |> show_guess(guess, origin)
-  end
-
 
   # Generate a new game
   def new_game do
