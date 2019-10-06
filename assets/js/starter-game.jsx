@@ -17,12 +17,12 @@ class Starter extends React.Component {
 
         this.channel
             .join()
-            .receive("ok", this.got_view.bind(this))
+            .receive("ok", this.get_view.bind(this))
             .receive("error", resp => { console.log("Unable to join", resp); });
     }
 
-    got_view(view) {
-        console.log("new view", view);
+    get_view(view) {
+        console.log(view);
         this.setState(view.game);
     }
 

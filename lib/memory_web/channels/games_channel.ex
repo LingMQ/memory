@@ -1,10 +1,10 @@
-defmodule MemoryWeb.GameChanel do
+defmodule MemoryWeb.GameChannel do
 
   use MemoryWeb, :channel
 
   alias Memory.Game
 
-  def join("games:" <> name, payload, socket) do
+  def join("game:" <> name, payload, socket) do
     game = Game.new()
     socket = socket
              |> assign(:game, game)
