@@ -2,7 +2,7 @@ defmodule Memory.Game do
   def new do
     %{
       list: new_game(),
-      completed: ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
+      completed: [],
       current: [],
       num_click: 0,
     }
@@ -14,34 +14,35 @@ defmodule Memory.Game do
       guesses = game.current
       %{
         status: compose_status(l, comp, guesses),
-        clicks: game.num_click
+        num_clicks: game.num_click
       }
   end
 
   def click(game, i, j) do
-    {:ok, curr} = Enum.fetch(game.list, i * 4 + j)
+    click_num = i * 4 + j
+    {:ok, curr} = Enum.fetch(game.list, click_num)
     # meaning the tile is not completed yet
-    if Enum.member?(i * 4 + j) == false do
+    if Enum.member?(game.completed, click_num) == false do
       case Enum.count(game.current) do
         0 ->
           game
-          |> Map.put(:current, [i * 4 + j])
+          |> Map.put(:current, [click_num])
           |> Map.put(:num_click, game.num_click + 1)
         1 ->
 
           {:ok, previous} = Enum.fetch(game.list, Enum.at(game.current, 0))
           cond do
-            previous == (i * 4 + j) -> game
+            previous == click_num -> game
             # find the same
             previous == curr ->
               game
-              |> Map.put(:completed, game.completed ++ [curr])
+              |> Map.put(:completed, game.completed ++ [curr, previous])
               |> Map.put(:current, [])
               |> Map.put(:num_click, game.num_click + 1)
             previous != curr ->
               ng = game
                    |> Map.put(:num_click, game.num_click + 1)
-                   |> Map.put(:completed, game.completed ++ [i * 4 + j])
+                   |> Map.put(:completed, game.completed ++ [click_num])
               [ng, Map.put(ng, :current, [])]
           end
         _ -> game
@@ -52,7 +53,26 @@ defmodule Memory.Game do
   end
 
   defp compose_status(l, comp, guesses) do
-    ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""]
+    l
+    |> Enum.map(fn cc ->
+      if Enum.member?(comp, cc) do
+        cc
+      else
+        " "
+      end
+    end)
+    |> show_guess(guesses, l)
+  end
+
+  defp show_guess(list, [], _) do
+    list
+  end
+
+  defp show_guess(list, guess, origin) do
+    [a | guess] = guess
+    list
+    |> List.replace_at(a, Enum.fetch!(origin, a))
+    |> show_guess(guess, origin)
   end
 
   # Generate a new game

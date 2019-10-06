@@ -23,11 +23,13 @@ class Starter extends React.Component {
 
     get_view(view) {
         console.log(view);
+        console.log(this.state.status)
+        console.log(this.state.num_click)
         this.setState(view.game);
     }
 
     handleClick(i, j) {
-        this.channel.push("guess", {click: i, j})
+        this.channel.push("guess", {i, j})
             .receive("ok", this.get_view.bind(this));
     }
 
@@ -41,12 +43,6 @@ class Starter extends React.Component {
         return 116 - this.state.num_click
     }
 
-    /*
-    reGame() {
-        let empty_status = [["", "", "", ""], ["", "", "", ""], ["", "", "", ""], ["", "", "", ""]]
-        this.setState({board: this.state.board, status: empty_status, count: 0, prev_i: -1, prev_j: -1,
-            curr_i: -1, curr_j: -1, num_click: 0})
-    }*/
 
     reGame() {
         this.channel.push("restart", {})
@@ -80,28 +76,28 @@ class Board extends React.Component {
         return (
             <div>
                 <div className="row">
-                    {this.props.root.renderSquare(0)}
-                    {this.props.root.renderSquare(1)}
-                    {this.props.root.renderSquare(2)}
-                    {this.props.root.renderSquare(3)}
+                    {this.props.root.renderSquare(0, 0)}
+                    {this.props.root.renderSquare(0, 1)}
+                    {this.props.root.renderSquare(0, 2)}
+                    {this.props.root.renderSquare(0, 3)}
                 </div>
                 <div className="row">
-                    {this.props.root.renderSquare(4)}
-                    {this.props.root.renderSquare(5)}
-                    {this.props.root.renderSquare(6)}
-                    {this.props.root.renderSquare(7)}
+                    {this.props.root.renderSquare(1, 0)}
+                    {this.props.root.renderSquare(1, 1)}
+                    {this.props.root.renderSquare(1, 2)}
+                    {this.props.root.renderSquare(1, 3)}
                 </div>
                 <div className="row">
-                    {this.props.root.renderSquare(8)}
-                    {this.props.root.renderSquare(9)}
-                    {this.props.root.renderSquare(10)}
-                    {this.props.root.renderSquare(11)}
+                    {this.props.root.renderSquare(2, 0)}
+                    {this.props.root.renderSquare(2, 1)}
+                    {this.props.root.renderSquare(2, 2)}
+                    {this.props.root.renderSquare(2, 3)}
                 </div>
                 <div className="row">
-                    {this.props.root.renderSquare(12)}
-                    {this.props.root.renderSquare(13)}
-                    {this.props.root.renderSquare(14)}
-                    {this.props.root.renderSquare(15)}
+                    {this.props.root.renderSquare(3, 0)}
+                    {this.props.root.renderSquare(3, 1)}
+                    {this.props.root.renderSquare(3, 2)}
+                    {this.props.root.renderSquare(3, 3)}
                 </div>
             </div>
         )
